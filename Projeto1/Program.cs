@@ -4,12 +4,32 @@ using System.Data;
 
 namespace Projeto1
 {
+    class Banco
+    {
+        private readonly MySqlConnection conexao;
+        public Banco()
+        {
+            
+            MySqlConnection conexao = new MySqlConnection("Server=localhost;DataBase=dbExemplo; User=root; pwd=12345678");
+            conexao.Open();
+
+            
+        }
+        public void ExecutaComando (string StrQuery)
+        {
+            var vComando = new MySqlCommand
+            {
+                CommandText = StrQuery, CommandType = System.Data.CommandType.Text, Connection = conexao
+            };
+        }
+    }
+     
+    
     class Program
     {
         static void Main(string[] args)
         {
-            MySqlConnection conexao = new MySqlConnection("Server=localhost;DataBase=dbExemplo; User=root; pwd=12345678");
-            conexao.Open();
+            
 
             /* string strAtualizaUsu = "update tbUsuario set nomeUsu = 'meachoesperta' where idUsu = 2 ";
              MySqlCommand comandoAtualiza = new MySqlCommand(strAtualizaUsu, conexao);
@@ -29,7 +49,7 @@ namespace Projeto1
             string vData = Console.ReadLine();
 
 
-            string strinsereUsu = string.Format("insert into tbUsuario(nomeUsu, cargo, datanasc) VALUES('{0}', '{1}', '{2}' );",vNome, vCargo, vData);
+            string strinsereUsu = string.Format("insert into tbUsuario(nomeUsu, cargo, datanasc) VALUES('{0}', '{1}', DATE_FORMAT(STR_TO_DATE('{2}', '%d/%m/%Y'), '%Y-%m-%d'));", vNome, vCargo, vData);
 
             MySqlCommand comandoinserir = new MySqlCommand(strinsereUsu, conexao);
             comandoinserir.ExecuteNonQuery();
