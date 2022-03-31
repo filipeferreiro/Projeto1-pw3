@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projeto1
 {
-    class Usuario
+    public class Usuario
     {
         public int idUsu {get; set; }
         public string nomeUsu { get; set; }
@@ -15,7 +15,5 @@ namespace Projeto1
 
         public DateTime datanasc { get; set; }
 
-
-        
     }
 }
